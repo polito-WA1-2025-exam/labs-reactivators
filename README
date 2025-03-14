@@ -1,0 +1,6 @@
+objects: meme_pictures, captions, players, game_session
+player properties: player username, player id, player email, total score
+meme properties: meme_id, image url, best three captions
+game properties: game id, random meme, four random captions, score, message report
+game session properties: random_games, total_scores, summary_report
+

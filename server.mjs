@@ -1,8 +1,107 @@
 import sqlite from 'sqlite3'
 
 const db = new sqlite.Database('meme.sqlite', (err)=> {if (err) {console.log("Database connection error:", err);
- } else{ console.log("Databse connection successful!")
+ } else{ console.log("Database connection successful!")
 };
 });
-
 export default db;
+
+import express from 'express'
+import { addUser } from './users.mjs';
+
+const app = express();
+app.use(express.json())
+app.listen(3000, () =>	console.log('Server is ready')) ;
+app.get('/api/users', (req, res) => {
+    const sql = "SELECT * FROM user";
+    db.all(sql, [], (err, rows) => {
+      if (err) res.status(500).json({ error: err.message });
+      else res.json(rows);
+    });
+  });
+
+  app.get('/api/users/search', (req, res) => {
+    const score = req.query.score;
+    const sql = "SELECT * FROM user WHERE total_score = 50";
+    db.all(sql, [score], (err, rows) => {
+      if (err) res.status(500).json({ error: err.message });
+      else res.json(rows);
+    });
+  });
+//part c 
+app.get('/api/users/id', (req, res) => {
+    const id = req.params.id;
+    const sql = "SELECT * FROM user WHERE id =27";
+    db.get(sql, [id], (err, row) => {
+      if (err) res.status(500).json({ error: err.message });
+      else if (row) res.json(row);
+      else res.status(404).json({ error: "User not found" });
+    });
+  });
+
+  
+  app.post('/api/users', (req, res) => {
+    const { username, password, total_score } = req.body;
+  
+    if (!username || !password) {
+      return res.status(400).json({ error: "Username and password are required" });
+    }
+    addUser(db, username, password, total_score); 
+    res.status(201).json({ message: "User creation in progress" });
+  });
+
+  //part e
+  app.put('/api/users/:id', (req, res) => {
+    const id = req.params.id;  // Get the user ID from the URL
+    const { username, password, total_score } = req.body;  // Get updated values from request body
+
+    // Ensure all fields are provided
+    if (!username || !password || total_score === undefined) {
+        return res.status(400).json({ error: "All fields (username, password, total_score) are required" });
+    }
+
+    // SQL query to update user details (excluding the ID)
+    const sql = `UPDATE user SET username = ?, password = ?, total_score = ? WHERE id = ?`;
+
+    db.run(sql, [username, password, total_score, id], function (err) {
+        if (err) {
+            res.status(500).json({ error: err.message });
+        } else {
+            if (this.changes > 0) {
+                res.json({ message: `User with ID ${id} updated successfully` });
+            } else {
+                res.status(404).json({ error: `No user found with ID ${id}` });
+            }
+        }
+    });
+});
+
+  
+  //part f
+  app.patch('/api/users/:id', (req, res) => {
+    const id = req.params.id;
+    const { total_score } = req.body;
+    const sql = "UPDATE user SET total_score = ? WHERE id = ?";
+    db.run(sql, [total_score, id], function (err) {
+      if (err) res.status(500).json({ error: err.message });
+      else res.json({ changes: this.changes });
+    });
+  });
+
+  //part g
+
+  app.delete('/api/users/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = "DELETE FROM user WHERE id = ?";
+    db.run(sql, [id], function (err) {
+      if (err) res.status(500).json({ error: err.message });
+      else res.json({ deleted: this.changes > 0 });
+    });
+});
+
+  
+
+
+
+
+

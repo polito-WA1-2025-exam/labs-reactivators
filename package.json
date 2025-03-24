@@ -8,9 +8,21 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "- s342274 NABIDOKHT FATEMEH\r - s339289 HOSSEINALI POUR NEGAR\r - s339153 HEMMATI FATEMEH\r - s3480007 ALINEZHAD JAHROMI SANAM",
   "dependencies": {
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
     "dayjs": "^1.11.13",
+    "express": "^4.21.2",
+    "morgan": "^1.10.0",
     "sqlite3": "^5.1.7"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polito-WA1-2025-exam/labs-reactivators.git"
+  },
+  "bugs": {
+    "url": "https://github.com/polito-WA1-2025-exam/labs-reactivators/issues"
+  },
+  "homepage": "https://github.com/polito-WA1-2025-exam/labs-reactivators#readme"
 }

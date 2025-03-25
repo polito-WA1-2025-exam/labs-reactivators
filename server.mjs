@@ -8,10 +8,13 @@ export default db;
 
 import express from 'express'
 import { addUser } from './users.mjs';
+import { addMemes, deleteMemeById, updateMemeImageUrlById } from './memes.mjs';
+
+
 
 const app = express();
 app.use(express.json())
-app.listen(3000, () =>	console.log('Server is ready')) ;
+app.listen(3001, () =>	console.log('Server is ready')) ;
 app.get('/api/users', (req, res) => {
     const sql = "SELECT * FROM user";
     db.all(sql, [], (err, rows) => {
@@ -99,9 +102,81 @@ app.get('/api/users/id', (req, res) => {
     });
 });
 
-  
+/*-----------------------------------------------------memes------------------------------------------------------ */  
+
+// GET all memes
+app.get('/api/memes', (req, res) => {
+  const sql = "SELECT * FROM memes";
+  db.all(sql, [], (err, rows) => {
+      if (err) res.status(500).json({ error: err.message });
+      else res.json(rows);
+  });
+});
 
 
+// GET memes by specific image URL
+app.get('/api/memes/search', (req, res) => {
+  const imgUrl = req.query.img_url;
+  const sql = "SELECT * FROM memes WHERE img_url = ?";
+  db.all(sql, [imgUrl], (err, rows) => {
+    if (err) res.status(500).json({ error: err.message });
+    else res.json(rows);
+  });
+});
 
+// GET meme by ID
+app.get('/api/memes/:meme_id', (req, res) => {
+  const meme_id = req.params.meme_id;
+  const sql = "SELECT * FROM memes WHERE meme_id = ?";
+  db.get(sql, [meme_id], (err, row) => {
+      if (err) res.status(500).json({ error: err.message });
+      else if (row) res.json(row);
+      else res.status(404).json({ error: "Meme not found" });
+  });
+});
 
+// POST: add meme
+app.post('/api/memes', (req, res) => {
+  const { img_url } = req.body;
+  if (!img_url) {
+      return res.status(400).json({ error: "Image URL is required" });
+  }
+  addMemes(db, img_url);
+  res.status(201).json({ message: "Meme creation in progress" });
+});
 
+// PUT: update full meme
+app.put('/api/memes/:meme_id', (req, res) => {
+  const meme_id = req.params.meme_id;
+  const { img_url } = req.body;
+  if (!img_url) {
+      return res.status(400).json({ error: "Image URL is required" });
+  }
+  const sql = `UPDATE memes SET img_url = ? WHERE meme_id = ?`;
+  db.run(sql, [img_url, meme_id], function (err) {
+      if (err) res.status(500).json({ error: err.message });
+      else if (this.changes > 0) res.json({ message: `Meme with ID ${meme_id} updated successfully` });
+      else res.status(404).json({ error: `No meme found with ID ${meme_id}` });
+  });
+});
+
+// PATCH: update only image URL
+app.patch('/api/memes/:meme_id', (req, res) => {
+  const meme_id = req.params.meme_id;
+  const { img_url } = req.body;
+  const sql = "UPDATE memes SET img_url = ? WHERE meme_id = ?";
+  db.run(sql, [img_url, meme_id], function (err) {
+      if (err) res.status(500).json({ error: err.message });
+      else res.json({ changes: this.changes });
+  });
+});
+
+// DELETE meme
+app.delete('/api/memes/:meme_id', (req, res) => {
+  const meme_id = req.params.meme_id;
+  const sql = "DELETE FROM memes WHERE meme_id = ?";
+  db.run(sql, [meme_id], function (err) {
+      if (err) res.status(500).json({ error: err.message });
+      else res.json({ deleted: this.changes > 0 });
+  });
+});

@@ -1,17 +1,30 @@
+//users
 //Post http://localhost:3000/api/users
 //updating user with id=35
 //PATCH  http://localhost:3000/api/users/35
 //DELETE http://localhost:3000/api/users/35
 //Post http://localhost:3000/api/users
-Post http://localhost:3000/api/users
+//Post http://localhost:3000/api/users
+
+//memes
+//GET http://localhost:3001/api/memes/search?img_url=https://miro.medium.com/v2/resize:fit:1400/1*GI-td9gs8D5OKZd19mAOqA.png
+//GET http://localhost:3001/api/memes/2
+//POST http://localhost:3001/api/memes
+//DELETE http://localhost:3001/api/memes/2
 
 Content-Type: application/json
 
-{
-  "username": "tomiii",
-  "password": "000pass123",
-  "total_score": 88
-}
+
+//--------------------------------users----------------------------
+//{
+//  "username": "tomiii",
+//  "password": "000pass123",
+//  "total_score": 88
+//}
 //{
 //  "total_score": 100
+//}
+//-------------------------------memes----------------------------
+//{
+//  "img_url": "https://your-url.com"
 //}

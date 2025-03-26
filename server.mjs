@@ -13,6 +13,9 @@ import express from "express";
 import { addUser } from "./users.mjs";
 import { addMemes, deleteMemeById, updateMemeImageUrlById } from "./memes.mjs";
 
+import { addMemeCaption } from "./mem_captions.mjs";
+import { addCaption } from "./captions.mjs";
+
 const app = express();
 app.use(express.json());
 app.listen(3001, () => console.log("Server is ready"));
@@ -183,5 +186,142 @@ app.delete("/api/memes/:meme_id", (req, res) => {
   db.run(sql, [meme_id], function (err) {
     if (err) res.status(500).json({ error: err.message });
     else res.json({ deleted: this.changes > 0 });
+  });
+});
+
+// Route to add a meme-caption relationship
+app.post("/api/memeCaptions", (req, res) => {
+  const { meme_id, caption_id, score } = req.body;
+  if (!meme_id || !caption_id || score === undefined) {
+    return res.status(400).json({
+      error: "meme_id, caption_id, and score are required",
+    });
+  }
+  addMemeCaption(db, meme_id, caption_id, score);
+
+  res.status(201).json({ message: "Meme-caption relationship creation in progress" });
+});
+
+// Route to get all meme-caption relationships
+app.get("/api/memeCaptions", (req, res) => {
+  const sql = "SELECT * FROM memeCaptions";
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+    } else {
+      res.json(rows);
+    }
+  });
+});
+
+// Route to update the score of a meme-caption relationship
+app.patch("/api/memeCaptions/:meme_id/:caption_id", (req, res) => {
+  const { meme_id, caption_id } = req.params;
+  const { score } = req.body;
+  if (score === undefined) {
+    return res.status(400).json({ error: "Score is required" });
+  }
+
+  const sql = `UPDATE memeCaptions SET score = ? WHERE meme_id = ? AND caption_id = ?`;
+  db.run(sql, [score, meme_id, caption_id], function (err) {
+    if (err) {
+      res.status(500).json({ error: err.message });
+    } else if (this.changes > 0) {
+      res.json({ message: "Meme-caption score updated successfully" });
+    } else {
+      res.status(404).json({ error: "Meme-caption relationship not found" });
+    }
+  });
+});
+
+// Route to delete a meme-caption relationship
+app.delete("/api/memeCaptions/:meme_id/:caption_id", (req, res) => {
+  const { meme_id, caption_id } = req.params;
+
+  const sql = `DELETE FROM memeCaptions WHERE meme_id = ? AND caption_id = ?`;
+  db.run(sql, [meme_id, caption_id], function (err) {
+    if (err) {
+      res.status(500).json({ error: err.message });
+    } else if (this.changes > 0) {
+      res.json({ message: "Meme-caption relationship deleted successfully" });
+    } else {
+      res.status(404).json({ error: "Meme-caption relationship not found" });
+    }
+  });
+});
+
+// Route to add a new caption
+app.post("/api/captions", (req, res) => {
+  const { text } = req.body;
+  if (!text) {
+    return res.status(400).json({ error: "Caption text is required" });
+  }
+  addCaption(db, text);
+  res.status(201).json({ message: "Caption creation in progress" });
+});
+
+// Route to retrieve all captions
+app.get("/api/captions", (req, res) => {
+  const sql = "SELECT * FROM captions";
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+    } else {
+      res.json(rows);
+    }
+  });
+});
+
+// Route to retrieve a caption by ID
+app.get("/api/captions/:caption_id", (req, res) => {
+  const { caption_id } = req.params;
+
+  const sql = "SELECT * FROM captions WHERE caption_id = ?";
+  db.get(sql, [caption_id], (err, row) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+    } else if (row) {
+      res.json(row);
+    } else {
+      res.status(404).json({ error: "Caption not found" });
+    }
+  });
+});
+
+// Route to update a caption by ID
+app.put("/api/captions/:caption_id", (req, res) => {
+  const { caption_id } = req.params;
+  const { text } = req.body;
+
+  // Validate the request body
+  if (!text) {
+    return res.status(400).json({ error: "Caption text is required" });
+  }
+
+  const sql = "UPDATE captions SET text = ? WHERE caption_id = ?";
+  db.run(sql, [text, caption_id], function (err) {
+    if (err) {
+      res.status(500).json({ error: err.message });
+    } else if (this.changes > 0) {
+      res.json({ message: `Caption with ID ${caption_id} updated successfully` });
+    } else {
+      res.status(404).json({ error: "Caption not found" });
+    }
+  });
+});
+
+// Route to delete a caption by ID
+app.delete("/api/captions/:caption_id", (req, res) => {
+  const { caption_id } = req.params;
+
+  const sql = "DELETE FROM captions WHERE caption_id = ?";
+  db.run(sql, [caption_id], function (err) {
+    if (err) {
+      res.status(500).json({ error: err.message });
+    } else if (this.changes > 0) {
+      res.json({ message: `Caption with ID ${caption_id} deleted successfully` });
+    } else {
+      res.status(404).json({ error: "Caption not found" });
+    }
   });
 });

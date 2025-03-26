@@ -6,6 +6,8 @@ import { addMemes, deleteMemeById, updateMemeImageUrlById } from "./memes.mjs";
 //import { addCaption,deleteCaptionById,updateCaptionTextById } from './captions.mjs';
 //import{addMemeCaption,deleteMemeCaptionById,updateMemeCaptionScoreById} from './memeCaptions.mjs';
 import { addGame, deleteGameById, updateGameCompletionById } from "./games.mjs";
+import { addCaption } from "./captions.mjs";
+import { addMemeCaption } from "./mem_captions.mjs";
 
 //---------------------------------------------------rounds------------------------------------------------------
 
@@ -35,9 +37,23 @@ updateUserScoreById(db, 2, 250);
 //deleteMemeById(db, 1);
 
 updateMemeImageUrlById(db, 2, "https://example.com/updated-dog-meme.png");
-
-//---------------------------------------------------meme_captions------------------------------------------------------
-
 //---------------------------------------------------captions------------------------------------------------------
+
+// Add captions and ensure the IDs are valid
+// addCaption(db, "When you realize it's Monday again");
+// addCaption(db, "That moment when you find extra fries in the bag");
+// addCaption(db, "Trying to look busy at work");
+// addCaption(db, "Me after eating an entire pizza by myself");
+
+// //---------------------------------------------------meme_captions------------------------------------------------------
+
+// // Add meme-caption relationships
+// // Make sure you manually specify the correct IDs for `meme_id` and `caption_id`
+// // For example, if memes with `meme_id` values 1, 2, 3, 4 exist in the database:
+
+// addMemeCaption(db, 2, 2, 15); // Meme 2, Caption 2, Score 15
+// addMemeCaption(db, 3, 3, 20); // Meme 3, Caption 3, Score 20
+// addMemeCaption(db, 4, 4, 25); // Meme 4, Caption 4, Score 25
+
 
 //---------------------------------------------------games------------------------------------------------------

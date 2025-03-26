@@ -1,12 +1,11 @@
 import db from "./server.mjs";
 
-
-import { addRound, deleteRoundById, updateRoundScoreById } from './rounds.mjs';
-import { addUser,deleteUserById,updateUserScoreById } from './users.mjs'; 
-import { addMemes,deleteMemeById,updateMemeImageUrlById } from './memes.mjs'; 
+import { addRound, deleteRoundById, updateRoundScoreById } from "./rounds.mjs";
+import { addUser, deleteUserById, updateUserScoreById } from "./users.mjs";
+import { addMemes, deleteMemeById, updateMemeImageUrlById } from "./memes.mjs";
 //import { addCaption,deleteCaptionById,updateCaptionTextById } from './captions.mjs';
 //import{addMemeCaption,deleteMemeCaptionById,updateMemeCaptionScoreById} from './memeCaptions.mjs';
-import { addGame, deleteGameById, updateGameCompletionById } from './games.mjs';
+import { addGame, deleteGameById, updateGameCompletionById } from "./games.mjs";
 
 //---------------------------------------------------rounds------------------------------------------------------
 
@@ -35,17 +34,10 @@ updateUserScoreById(db, 2, 250);
 
 //deleteMemeById(db, 1);
 
-updateMemeImageUrlById(db, 2, 'https://example.com/updated-dog-meme.png');
-
+updateMemeImageUrlById(db, 2, "https://example.com/updated-dog-meme.png");
 
 //---------------------------------------------------meme_captions------------------------------------------------------
 
-
-
 //---------------------------------------------------captions------------------------------------------------------
-
-
-
-
 
 //---------------------------------------------------games------------------------------------------------------

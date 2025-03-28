@@ -1,12 +1,13 @@
 import db from "./server.mjs";
 
 export function addMemes(db, img_url) {
-  const sql = `INSERT INTO memes (img_url) VALUES (?)`;
-  db.run(sql, [img_url], function (err) {
+  const sql = `INSERT INTO memes (meme_id, img_url) VALUES (?, ?)`;
+  const meme_id = Date.now().toString(); // Generate a unique text ID
+  db.run(sql, [meme_id, img_url], function (err) {
     if (err) {
       console.error("Error adding meme:", err.message);
     } else {
-      console.log(`Meme added successfully with ID: ${this.lastID}`);
+      console.log(`Meme added successfully with ID: ${meme_id}`);
     }
   });
 }

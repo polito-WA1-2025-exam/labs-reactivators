@@ -325,3 +325,172 @@ app.delete("/api/captions/:caption_id", (req, res) => {
     }
   });
 });
+
+// Rounds API endpoints
+app.get("/api/rounds", (req, res) => {
+  const sql = "SELECT * FROM rounds";
+  db.all(sql, [], (err, rows) => {
+    if (err) res.status(500).json({ error: err.message });
+    else res.json(rows);
+  });
+});
+
+app.get("/api/rounds/game/:game_id", (req, res) => {
+  const { game_id } = req.params;
+  const sql = "SELECT * FROM rounds WHERE game_id = ?";
+  db.all(sql, [game_id], (err, rows) => {
+    if (err) res.status(500).json({ error: err.message });
+    else res.json(rows);
+  });
+});
+
+app.get("/api/rounds/:id", (req, res) => {
+  const { id } = req.params;
+  const sql = "SELECT * FROM rounds WHERE id = ?";
+  db.get(sql, [id], (err, row) => {
+    if (err) res.status(500).json({ error: err.message });
+    else if (row) res.json(row);
+    else res.status(404).json({ error: "Round not found" });
+  });
+});
+
+app.post("/api/rounds", (req, res) => {
+  const { game_id, meme_id, selected_caption_id, score } = req.body;
+  if (!game_id || !meme_id || !selected_caption_id || score === undefined) {
+    return res.status(400).json({ error: "Missing required fields" });
+  }
+  
+  const sql = "INSERT INTO rounds (game_id, meme_id, selected_caption_id, score, created_at) VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)";
+  db.run(sql, [game_id, meme_id, selected_caption_id, score], function(err) {
+    if (err) res.status(500).json({ error: err.message });
+    else res.json({ id: this.lastID });
+  });
+});
+
+app.put("/api/rounds/:id", (req, res) => {
+  const { id } = req.params;
+  const { game_id, meme_id, selected_caption_id, score } = req.body;
+  
+  if (!game_id || !meme_id || !selected_caption_id || score === undefined) {
+    return res.status(400).json({ error: "Missing required fields" });
+  }
+
+  const sql = "UPDATE rounds SET game_id = ?, meme_id = ?, selected_caption_id = ?, score = ? WHERE id = ?";
+  db.run(sql, [game_id, meme_id, selected_caption_id, score, id], function(err) {
+    if (err) res.status(500).json({ error: err.message });
+    else if (this.changes > 0) res.json({ message: "Round updated successfully" });
+    else res.status(404).json({ error: "Round not found" });
+  });
+});
+
+app.patch("/api/rounds/:id", (req, res) => {
+  const { id } = req.params;
+  const { score } = req.body;
+
+  if (score === undefined) {
+    return res.status(400).json({ error: "Score is required" });
+  }
+
+  const sql = "UPDATE rounds SET score = ? WHERE id = ?";
+  db.run(sql, [score, id], function(err) {
+    if (err) res.status(500).json({ error: err.message });
+    else if (this.changes > 0) res.json({ message: "Round score updated successfully" });
+    else res.status(404).json({ error: "Round not found" });
+  });
+});
+
+// Games API endpoints
+app.get("/api/games", (req, res) => {
+  const sql = "SELECT * FROM games";
+  db.all(sql, [], (err, rows) => {
+    if (err) res.status(500).json({ error: err.message });
+    else res.json(rows);
+  });
+});
+
+app.get("/api/games/completed", (req, res) => {
+  const sql = "SELECT * FROM games WHERE completed = 1";
+  db.all(sql, [], (err, rows) => {
+    if (err) res.status(500).json({ error: err.message });
+    else res.json(rows);
+  });
+});
+
+app.get("/api/games/:id", (req, res) => {
+  const { id } = req.params;
+  const sql = "SELECT * FROM games WHERE id = ?";
+  db.get(sql, [id], (err, row) => {
+    if (err) res.status(500).json({ error: err.message });
+    else if (row) res.json(row);
+    else res.status(404).json({ error: "Game not found" });
+  });
+});
+
+app.post("/api/games", (req, res) => {
+  const { user_id, completed, total_score } = req.body;
+  if (!user_id || completed === undefined || total_score === undefined) {
+    return res.status(400).json({ error: "Missing required fields" });
+  }
+
+  const sql = "INSERT INTO games (user_id, completed, total_score, created_at) VALUES (?, ?, ?, CURRENT_TIMESTAMP)";
+  db.run(sql, [user_id, completed, total_score], function(err) {
+    if (err) res.status(500).json({ error: err.message });
+    else res.json({ id: this.lastID });
+  });
+});
+
+app.put("/api/games/:id", (req, res) => {
+  const { id } = req.params;
+  const { user_id, completed, total_score } = req.body;
+  
+  if (!user_id || completed === undefined || total_score === undefined) {
+    return res.status(400).json({ error: "Missing required fields" });
+  }
+
+  const sql = "UPDATE games SET user_id = ?, completed = ?, total_score = ? WHERE id = ?";
+  db.run(sql, [user_id, completed, total_score, id], function(err) {
+    if (err) res.status(500).json({ error: err.message });
+    else if (this.changes > 0) res.json({ message: "Game updated successfully" });
+    else res.status(404).json({ error: "Game not found" });
+  });
+});
+
+app.patch("/api/games/:id", (req, res) => {
+  const { id } = req.params;
+  const { completed, total_score } = req.body;
+
+  if (completed === undefined && total_score === undefined) {
+    return res.status(400).json({ error: "At least one field to update is required" });
+  }
+
+  let sql = "UPDATE games SET";
+  const params = [];
+  
+  if (completed !== undefined) {
+    sql += " completed = ?,";
+    params.push(completed);
+  }
+  if (total_score !== undefined) {
+    sql += " total_score = ?,";
+    params.push(total_score);
+  }
+  
+  sql = sql.slice(0, -1) + " WHERE id = ?";
+  params.push(id);
+
+  db.run(sql, params, function(err) {
+    if (err) res.status(500).json({ error: err.message });
+    else if (this.changes > 0) res.json({ message: "Game updated successfully" });
+    else res.status(404).json({ error: "Game not found" });
+  });
+});
+
+app.delete("/api/games/:id", (req, res) => {
+  const { id } = req.params;
+  const sql = "DELETE FROM games WHERE id = ?";
+  db.run(sql, [id], function(err) {
+    if (err) res.status(500).json({ error: err.message });
+    else if (this.changes > 0) res.json({ message: "Game deleted successfully" });
+    else res.status(404).json({ error: "Game not found" });
+  });
+});

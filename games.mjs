@@ -53,3 +53,78 @@ export function updateGameCompletionById(db, id, completed) {
     }
   });
 }
+
+export function getGameHistory(db, user_id) {
+  return new Promise((resolve, reject) => {
+    const sql = `
+      SELECT g.id, g.completed, g.total_score, g.created_at,
+             COUNT(r.id) as rounds_played
+      FROM games g
+      LEFT JOIN rounds r ON g.id = r.game_id
+      WHERE g.user_id = ?
+      GROUP BY g.id
+      ORDER BY g.created_at DESC
+    `;
+    db.all(sql, [user_id], (err, rows) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(rows);
+      }
+    });
+  });
+}
+
+export function getUserTotalScore(db, user_id) {
+  return new Promise((resolve, reject) => {
+    const sql = `
+      SELECT COALESCE(SUM(total_score), 0) as total_score
+      FROM games
+      WHERE user_id = ? AND completed = 1
+    `;
+    db.get(sql, [user_id], (err, row) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(row.total_score);
+      }
+    });
+  });
+}
+
+export function isGameComplete(db, game_id) {
+  return new Promise((resolve, reject) => {
+    const sql = `
+      SELECT COUNT(*) as round_count
+      FROM rounds
+      WHERE game_id = ?
+    `;
+    db.get(sql, [game_id], (err, row) => {
+      if (err) {
+        reject(err);
+      } else {
+        // For logged-in users, game is complete after 3 rounds
+        resolve(row.round_count >= 3);
+      }
+    });
+  });
+}
+
+export function getCurrentGameStatus(db, game_id) {
+  return new Promise((resolve, reject) => {
+    const sql = `
+      SELECT g.*, COUNT(r.id) as rounds_played
+      FROM games g
+      LEFT JOIN rounds r ON g.id = r.game_id
+      WHERE g.id = ?
+      GROUP BY g.id
+    `;
+    db.get(sql, [game_id], (err, row) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(row);
+      }
+    });
+  });
+}

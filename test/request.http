@@ -12,7 +12,7 @@
 //POST http://localhost:3001/api/memes
 //DELETE http://localhost:3001/api/memes/2
 
-Content-Type: application/json
+// Content-Type: application/json
 
 
 //--------------------------------users----------------------------
@@ -28,3 +28,21 @@ Content-Type: application/json
 //{
 //  "img_url": "https://your-url.com"
 //}
+//-------------------------------memeCaptions----------------------------
+POST http://localhost:3001/api/memeCaptions
+Content-Type: application/json
+{
+  "meme_id": 1,
+  "caption_id": 5,
+  "score": 10
+}
+###
+Post http://localhost:3001/api/captions
+Content-Type: application/json
+{
+  "text": "This is a funny caption!"
+}
+###
+GET http://localhost:3001/api/captions
+###
+GET http://localhost:3001/api/memeCaptions

@@ -1,0 +1,66 @@
+body {
+  margin: 0;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  background: url('backgroundIMG.png') no-repeat center center fixed;
+  background-size: cover;
+}
+.main-container {
+  min-height: 100vh;
+  padding: 30px;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  position: relative;
+  z-index: 1; 
+}
+
+
+
+.game-logo {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 4rem;
+  color: #0066CC; /* Darker Blue */
+  text-shadow: 2px 2px #ffe6e9;
+  margin-bottom: 0.3rem;
+}
+
+.logo-underline {
+  width: 120px;
+  height: 5px;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(to right, #0047AB, #003F73); /* Darker Cobalt Blue */
+  margin: 0 auto 20px auto;
+}
+
+.game-subtitle {
+  font-size: 1.2rem;
+  color: #000916; /* Darker Cobalt Blue */
+  margin-top: 10px;
+}
+
+.game-btn {
+  padding: 1rem 1.5rem;
+  font-size: 1.2rem;
+  border-radius: 40px;
+  font-weight: bold;
+  border: none;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.btn-default {
+  background: linear-gradient(to right, #0096FF, #003F73); /* Bright Blue to Darker Cobalt Blue */
+  color: white;
+}
+
+.btn-user {
+  background: linear-gradient(to right, #4C6C7C, #003F73); /* Darker Cadet Blue to Darker Cobalt Blue */
+  color: white;
+}
+
+.game-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}

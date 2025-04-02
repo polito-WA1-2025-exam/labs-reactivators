@@ -1,14 +1,18 @@
 import db from "./server.mjs";
 
-import { addRound, deleteRoundById, updateRoundScoreById } from "./rounds.mjs";
+//import { addRound, deleteRoundById, updateRoundScoreById } from "./rounds.mjs";
 import { addUser, deleteUserById, updateUserScoreById } from "./users.mjs";
 import { addMemes, deleteMemeById, updateMemeImageUrlById } from "./memes.mjs";
 //import { addCaption,deleteCaptionById,updateCaptionTextById } from './captions.mjs';
 //import{addMemeCaption,deleteMemeCaptionById,updateMemeCaptionScoreById} from './memeCaptions.mjs';
-import { addGame, deleteGameById, updateGameCompletionById } from "./games.mjs";
+//import { addGame, deleteGameById, updateGameCompletionById } from "./games.mjs";
 import { addCaption } from "./captions.mjs";
 import { addMemeCaption } from "./mem_captions.mjs";
-
+import { 
+  addRound, 
+  getRoundsForGame
+} from "./rounds.mjs";
+import { addGame } from "./games.mjs";
 //---------------------------------------------------rounds------------------------------------------------------
 
 /*addRound(db, 1, 1, 2, 10);
@@ -56,4 +60,18 @@ updateMemeImageUrlById(db, 2, "https://example.com/updated-dog-meme.png");
 // addMemeCaption(db, 4, 4, 25); // Meme 4, Caption 4, Score 25
 
 
+
 //---------------------------------------------------games------------------------------------------------------
+// Add a new game
+addGame(db, 1, false, 0); // user_id 1, not completed, initial score 0
+
+//---------------------------------------------------rounds------------------------------------------------------
+// Add a round to the game
+addRound(db, 3, 1, 2, 10); // game_id 3, meme_id 1, caption_id 2, score 10
+
+// Test getting rounds for the game
+getRoundsForGame(db, 3).then(rounds => {
+  console.log("Rounds for game 3:", rounds);
+}).catch(err => {
+  console.error("Error getting rounds for game:", err);
+});

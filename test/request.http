@@ -46,3 +46,78 @@ Content-Type: application/json
 GET http://localhost:3001/api/captions
 ###
 GET http://localhost:3001/api/memeCaptions
+GET http://localhost:3001/api/memeCaptions
+
+###
+// Game APIs
+GET http://localhost:3001/api/games
+###
+GET http://localhost:3001/api/games/search?difficulty=hard
+###
+GET http://localhost:3001/api/games/1
+###
+POST http://localhost:3001/api/games
+Content-Type: application/json
+
+{
+  "title": "New Game",
+  "difficulty": "medium",
+  "max_players": 4,
+  "min_players": 2
+}
+###
+PUT http://localhost:3001/api/games/1
+Content-Type: application/json
+
+{
+  "title": "Updated Game",
+  "difficulty": "hard",
+  "max_players": 6,
+  "min_players": 3
+}
+###
+PATCH http://localhost:3001/api/games/1
+Content-Type: application/json
+
+{
+  "difficulty": "easy"
+}
+###
+DELETE http://localhost:3001/api/games/1
+###
+
+// Rating APIs
+GET http://localhost:3001/api/ratings
+###
+GET http://localhost:3001/api/ratings/search?score=5
+###
+GET http://localhost:3001/api/ratings/1
+###
+POST http://localhost:3001/api/ratings
+Content-Type: application/json
+
+{
+  "game_id": 1,
+  "user_id": 1,
+  "score": 5,
+  "comment": "Great game!"
+}
+###
+PUT http://localhost:3001/api/ratings/1
+Content-Type: application/json
+
+{
+  "game_id": 1,
+  "user_id": 1,
+  "score": 4,
+  "comment": "Updated review"
+}
+###
+PATCH http://localhost:3001/api/ratings/1
+Content-Type: application/json
+
+{
+  "score": 3
+}
+###
+DELETE http://localhost:3001/api/ratings/1

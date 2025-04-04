@@ -1,42 +1,70 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.container {
+  min-width: 100vw;
+  min-height: 100vh;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  background: url("./assets/backgroundIMG.png") center center / cover no-repeat fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+
+
+.game-logo {
+  font-family: "Luckiest Guy", cursive;
+  font-size: 4rem;
+  color: #0066cc; /* Darker Blue */
+  text-shadow: 2px 2px #ffe6e9;
+  margin-bottom: 0.3rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.logo-underline {
+  width: 120px;
+  height: 5px;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(
+    to right,
+    #0047ab,
+    #003f73
+  ); /* Darker Cobalt Blue */
+  margin: 0 auto 20px auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.game-subtitle {
+  font-size: 1.2rem;
+  color: #000916; /* Darker Cobalt Blue */
+  margin-top: 10px;
 }
 
-.card {
-  padding: 2em;
+.game-btn {
+ 
+  font-size: 1.2rem;
+  border-radius: 40px;
+  font-weight: bold;
+  border: none;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
-.read-the-docs {
-  color: #888;
+.btn-default {
+  background: linear-gradient(
+    to right,
+    #0096ff,
+    #003f73
+  ); /* Bright Blue to Darker Cobalt Blue */
+}
+
+.btn-user {
+  background: linear-gradient(
+    to right,
+    #4c6c7c,
+    #003f73
+  ); /* Darker Cadet Blue to Darker Cobalt Blue */
+}
+
+.game-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }

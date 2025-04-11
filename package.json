@@ -11,7 +11,7 @@
   "description": "- s342274 NABIDOKHT FATEMEH\r - s339289 HOSSEINALI POUR NEGAR\r - s339153 HEMMATI FATEMEH\r - s3480007 ALINEZHAD JAHROMI SANAM",
   "dependencies": {
     "body-parser": "^1.20.3",
-    "bootstrap": "^5.3.4",
+    "bootstrap": "^5.3.5",
     "cors": "^2.8.5",
     "dayjs": "^1.11.13",
     "express": "^4.21.2",

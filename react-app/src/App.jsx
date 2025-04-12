@@ -1,11 +1,20 @@
 import "./App.css";
-import Home from "./components/Home/Home";
-import Login from "./components/login/login";
+import Home from "./pages/Home/Home";
+import Login from "./pages/Login/login";
+//for having different pages in the app (router)
+import{Route,Routes} from "react-router-dom";
+
+
 function App() {
   return (
     <div>
-      <Home/>
-      <Login/>
+      <Routes>
+
+        <Route path="/" element={<Home/>}/> 
+        <Route path="/Login" element={<Login/>}/>
+
+      </Routes>
+
     </div>
   );
 }

@@ -1,0 +1,96 @@
+
+.container {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 40px;
+    height: 100vh;
+    width: 100vw;
+    background-color: #f5f8fc; 
+  }
+
+  
+  .form-box {
+    background-color: white;
+    width: 340px;
+    min-height: 340px;       
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 6px 12px rgba(0, 63, 127, 0.2); 
+    font-family: "Comic Sans MS", cursive,sans-serif;
+      min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #004aad;
+    font-family: 'Luckiest Guy', cursive, sans-serif;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column; 
+  }
+  .form-box input {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 4px;
+    background-color: #1e1e1e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+
+
+  input::placeholder {
+    color: #bbb;
+  }
+  
+  input:focus {
+    border-color: #007bff;
+  }
+  
+  .btn {
+    background: linear-gradient(to right, #0066cc, #003f7f);
+    color: white;
+    border: none;
+    padding: 12px;
+    margin-top: 14px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 63, 127, 0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .btn:hover {
+    background: linear-gradient(to right, #0055aa, #002f6b);
+  }
+  
+  .switch-text {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 0.9rem;
+    color: #222;
+  }
+  
+  .switch-text a {
+    color: #004aad;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  .switch-text a:hover {
+    text-decoration: underline;
+  }

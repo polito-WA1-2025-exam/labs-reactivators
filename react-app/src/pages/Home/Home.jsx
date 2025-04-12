@@ -1,4 +1,5 @@
 import styles from "./Home.module.css";
+import { Link } from "react-router-dom";
 
 function Home(){
     return(
@@ -10,12 +11,14 @@ function Home(){
           <p className={styles["game-subtitle"]}>
             Get ready to laugh and play! Choose your mode below.
           </p>
-          <div className="mt-4 d-grid gap-4 col-10 col-md-3 text-white mx-auto">
-            <button className={`${styles.btn} ${styles["game-btn"]} ${styles["btn-default"]}`}
-            >
+          <div className="d-grid gap-4 col-md-3 text-white mx-auto">
+            <button  className={`${styles.btn} ${styles["game-btn"]} ${styles["btn-default"]}`}>
               Default Mode
             </button>
+
+            <Link to="/Login">
             <button className={`${styles.btn} ${styles["game-btn"]} ${styles["btn-user"]} px-24`}>Play as User</button>
+            </Link>
           </div>
         </div>
       </main>

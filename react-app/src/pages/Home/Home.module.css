@@ -1,0 +1,76 @@
+.container {
+    min-width: 100vw;
+    min-height: 100vh;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    background: url("../../assets/backgroundIMG.png") center center / cover no-repeat fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .game-logo {
+    font-family: "Luckiest Guy", cursive;
+    font-size: 4rem;
+    color: #0066cc;
+    text-shadow: 2px 2px #ffe6e9;
+    margin-bottom: 0.3rem;
+    text-align: center;
+  }
+  
+  .logo-underline {
+    width: 120px;
+    height: 5px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(to right, #0047ab, #003f73);
+    margin: 0 auto 20px auto; 
+  }
+  
+  .game-subtitle {
+    font-size: 1.2rem;
+    color: #000916; 
+    font-weight: bold; 
+    margin-top: 10px;
+    text-align: left;
+  }
+ 
+
+.btn-default {
+  background: linear-gradient(to right, #0066cc, #003f7f);
+}
+
+.btn-user {
+  background: linear-gradient(to right, #0047ab, #003f73);
+}
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px; 
+  margin-top: 20px;
+}
+
+.game-btn {
+  font-size: 1.2rem;
+  border-radius: 50px;
+  font-weight: bold;
+  border: none;
+  width: 250px; 
+  padding: 14px 0;
+  color: white;
+  background-color: #111;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.game-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+}

@@ -1,4 +1,4 @@
-.container {
+/* .container {
   min-width: 100vw;
   min-height: 100vh;
   font-family: "Comic Sans MS", cursive, sans-serif;
@@ -14,10 +14,10 @@
   font-family: "Luckiest Guy", cursive;
   font-size: 4rem;
   color: #0066cc; /* Darker Blue */
-  text-shadow: 2px 2px #ffe6e9;
+  /* text-shadow: 2px 2px #ffe6e9;
   margin-bottom: 0.3rem;
-}
-
+} */
+/* 
 .logo-underline {
   width: 120px;
   height: 5px;
@@ -28,16 +28,16 @@
     #0047ab,
     #003f73
   ); /* Darker Cobalt Blue */
-  margin: 0 auto 20px auto;
-}
-
+  /* margin: 0 auto 20px auto;
+} */
+/* 
 .game-subtitle {
   font-size: 1.2rem;
   color: #000916; /* Darker Cobalt Blue */
-  margin-top: 10px;
-}
+  /* margin-top: 10px;
+}   */
 
-.game-btn {
+/* .game-btn {
  
   font-size: 1.2rem;
   border-radius: 40px;
@@ -46,14 +46,14 @@
   width: 100%;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-}
+} */
 
-.btn-default {
+/* .btn-default {
   background: linear-gradient(
     to right,
     #0096ff,
     #003f73
-  ); /* Bright Blue to Darker Cobalt Blue */
+  ); 
 }
 
 .btn-user {
@@ -61,10 +61,10 @@
     to right,
     #4c6c7c,
     #003f73
-  ); /* Darker Cadet Blue to Darker Cobalt Blue */
+  ); 
 }
 
 .game-btn:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-}
+}  */

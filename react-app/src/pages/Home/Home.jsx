@@ -19,6 +19,9 @@ function Home(){
             <Link to="/Login">
             <button className={`${styles.btn} ${styles["game-btn"]} ${styles["btn-user"]} px-24`}>Play as User</button>
             </Link>
+            <Link to="/profile">
+            <button className={`${styles.btn} ${styles["game-btn"]} ${styles["btn-user"]} px-24`}>Play as User</button>
+            </Link>
           </div>
         </div>
       </main>

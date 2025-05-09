@@ -1,0 +1,112 @@
+/* profile.module.css */
+
+.profileContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 30px;
+    background-color: #f5f8fc;
+    color: black;
+    border-radius: 10px;
+    height: 100vh;
+    width: 100%;
+    min-width: 100vw;
+    box-sizing: border-box;
+  }
+  
+  .leftContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+  }
+  
+  .imageContainer {
+    width: 300px;
+    height: 300px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .profileImage {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+  }
+  
+  .infoContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10%;
+    margin-left: 15%;
+  }
+  
+  .inputField {
+    margin-bottom: 15px;
+  }
+  
+  .inputField input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .readOnlyInput {
+    background-color: #333;
+    color: #333;
+  }
+  
+  .totalScoreInput {
+    background-color: #333;
+  }
+  
+  .startButton {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .startButton:hover {
+    background-color: #0056b3;
+  }
+  
+  .historyContainer {
+    width: 45%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #2d2d2d;
+    color: white;
+    box-sizing: border-box;
+    margin-right: 5%;
+  }
+  
+  .historyTable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .historyTable th,
+  .historyTable td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .historyItemColumn {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  

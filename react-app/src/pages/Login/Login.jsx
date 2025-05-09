@@ -24,6 +24,7 @@ function Login(){
               <input type="text" placeholder="Username" />
               <input type="password" placeholder="Password" />
               <button className={styles.btn}>Login</button>
+              
             </form>
             <p className={styles["switch-text"]}>
               New user? <a href="/signup">Sign-up</a>
